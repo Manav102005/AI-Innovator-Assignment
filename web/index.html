@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Investing · Research Agent</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Main Content Area (Header removed completely) -->
+    <main class="main-container">
+      <!-- Configuration Bar -->
+      <section class="control-panel">
+        <div class="control-grid">
+          <div class="input-group">
+            <label for="ticker-input">NSE Ticker</label>
+            <input type="text" id="ticker-input" value="SRVCABLE" placeholder="e.g. SRVCABLE">
+          </div>
+          <div class="input-group">
+            <label for="model-select">LLM Model</label>
+            <select id="model-select">
+              <option value="gpt-4o-mini" selected>gpt-4o-mini (Fast & Cost-Efficient)</option>
+              <option value="gpt-4o">gpt-4o (Deep Reasoning)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="docs-input">Research Pack Path</label>
+            <input type="text" id="docs-input" value="./research_pack">
+          </div>
+          <div class="input-group action-group">
+            <label>&nbsp;</label>
+            <button id="run-btn" class="btn btn-primary">
+              <span id="btn-text">Run Research Agent</span>
+              <span id="btn-spinner" class="spinner hidden"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Two-Column Workspace -->
+      <div class="workspace-grid">
+        <!-- Left Column: Source Dossier & Safety Guard -->
+        <aside class="sidebar-panel">
+          <div class="panel-header">
+            <h3>Live Progress & Audit Feed</h3>
+            <span id="doc-count-badge" class="count-badge">8 docs</span>
+          </div>
+
+          <!-- Peaceful Timeline in Left Div Only -->
+          <div id="pipeline-tracker" class="pipeline-tracker-sidebar">
+            <div class="pipeline-tracker-inner">
+              <div class="pipeline-left">
+                <span class="peaceful-dot"></span>
+                <span id="pipeline-status-text" class="pipeline-status-text">Ready to run</span>
+              </div>
+              <span id="pipeline-step-badge" class="pipeline-peaceful-badge">0 / 5</span>
+            </div>
+            <div class="pipeline-steps-peaceful">
+              <span class="step-pill" id="step-1"><span class="pill-dot"></span>Ingest</span>
+              <span class="step-sep">/</span>
+              <span class="step-pill" id="step-2"><span class="pill-dot"></span>Traps</span>
+              <span class="step-sep">/</span>
+              <span class="step-pill" id="step-3"><span class="pill-dot"></span>Audit</span>
+              <span class="step-sep">/</span>
+              <span class="step-pill" id="step-4"><span class="pill-dot"></span>Dossier</span>
+              <span class="step-sep">/</span>
+              <span class="step-pill" id="step-5"><span class="pill-dot"></span>Synthesis</span>
+            </div>
+            <div class="pipeline-progress-track">
+              <div id="pipeline-progress-fill" class="pipeline-progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Security & Data Integrity Alerts -->
+          <div id="alerts-container" class="alerts-box">
+            <div class="alert-item alert-info">
+              <span class="alert-icon">i</span>
+              <span>Ready. Running analysis will perform dynamic prompt injection stripping & entity validation.</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Column: Research Brief & Output Tabs -->
+        <section class="content-panel">
+          <div class="tabs-header">
+            <div class="tabs-left">
+              <button class="tab-btn active" data-tab="formatted">Research Brief</button>
+              <button class="tab-btn" data-tab="raw">Raw Markdown</button>
+              <button class="tab-btn" data-tab="audit">Audit Dossier</button>
+            </div>
+            <div class="tabs-right">
+              <button id="copy-btn" class="btn btn-outline" title="Copy to clipboard">
+                <span>Copy Brief</span>
+              </button>
+              <button id="download-btn" class="btn btn-outline" title="Download brief as .md">
+                <span>Download .md</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab 1: Formatted View -->
+          <div id="tab-formatted" class="tab-pane active">
+            <article id="brief-container" class="brief-article">
+              <div class="empty-state">
+                <div class="empty-icon">□</div>
+                <h4>No brief generated yet</h4>
+                <p>Click "Run Research Agent" to inspect the research pack and synthesize the 1-page retail investor brief.</p>
+              </div>
+            </article>
+          </div>
+
+          <!-- Tab 2: Raw Markdown View -->
+          <div id="tab-raw" class="tab-pane">
+            <textarea id="raw-markdown" class="raw-textarea" readonly placeholder="Raw Markdown will appear here..."></textarea>
+          </div>
+
+          <!-- Tab 3: Audit Dossier View -->
+          <div id="tab-audit" class="tab-pane">
+            <pre id="audit-dossier" class="audit-pre">Audit dossier will appear here once the agent runs...</pre>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div>Super Investing · AI Research Agent</div>
+      <div class="footer-links">
+        <span>Anchor Date: 23 September 2026</span>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast hidden">Copied to clipboard!</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
